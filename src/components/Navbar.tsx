@@ -1,7 +1,34 @@
 import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { MenuIcon, XIcon } from 'lucide-react';
-import { NAV_LINKS } from '../data/content';
+const links = [
+{
+  href: '#hero',
+  label: 'Home'
+},
+{
+  href: '#about',
+  label: 'About'
+},
+{
+  href: '#experience',
+  label: 'Experience'
+},
+{
+  href: '#gallery',
+  label: 'Gallery'
+},
+{
+  href: '#achievements',
+  label: 'Achievements'
+},
+{
+  href: '#testimonials',
+  label: 'Testimonials'
+},
+{
+  href: '#contact',
+  label: 'Contact'
+}];
+
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -15,110 +42,64 @@ export function Navbar() {
   href: string) =>
   {
     e.preventDefault();
-    const target = document.querySelector(href);
-    if (target)
-    target.scrollIntoView({
+    document.querySelector(href)?.scrollIntoView({
       behavior: 'smooth',
       block: 'start'
     });
     setOpen(false);
   };
   return (
-    <motion.nav
-      className={`fixed top-0 left-0 z-[1000] w-full transition-all duration-300 ${scrolled ? 'py-3 bg-[rgba(246,249,247,0.96)] shadow-[0_2px_24px_rgba(0,0,0,0.1)] backdrop-blur-md' : 'py-5 bg-[rgba(246,249,247,0.9)] shadow-[0_1px_12px_rgba(0,0,0,0.08)]'}`}
-      initial={{
-        y: -80,
-        opacity: 0
-      }}
-      animate={{
-        y: 0,
-        opacity: 1
-      }}
-      transition={{
-        duration: 0.6,
-        ease: [0.22, 1, 0.36, 1]
+    <nav
+      className={`fixed top-0 left-0 w-full z-[1000] transition-all duration-300 ${scrolled ? 'py-3.5 shadow-[0_2px_24px_rgba(0,0,0,0.1)]' : 'py-5'}`}
+      style={{
+        backgroundColor: scrolled ?
+        'rgba(246,249,247,0.96)' :
+        'rgba(246,249,247,0.9)',
+        backdropFilter: scrolled ? 'blur(12px)' : 'none'
       }}>
       
-      <div className="mx-auto flex max-w-[1200px] items-center justify-between gap-6 px-6">
+      <div className="max-w-[1200px] mx-auto px-6 flex justify-between items-center gap-6">
         <a
           href="#hero"
           onClick={(e) => handleClick(e, '#hero')}
-          className="font-heading flex-shrink-0 whitespace-nowrap text-[1.15rem] font-bold tracking-[0.04em] text-accent">
+          className="font-heading text-[1.15rem] font-bold tracking-[0.04em] text-accent whitespace-nowrap">
           
           Coach A. Ademola
         </a>
 
-        <ul className="hidden items-center gap-8 md:flex">
-          {NAV_LINKS.map((link) =>
-          <li key={link.href}>
+        <button
+          className="md:hidden flex flex-col justify-center gap-[5px] w-7 h-7 z-[3000]"
+          aria-label="Toggle navigation"
+          onClick={() => setOpen((o) => !o)}>
+          
+          <span
+            className={`w-full h-0.5 bg-text-primary rounded transition-all duration-300 ${open ? 'rotate-45 translate-y-[7px]' : ''}`} />
+          
+          <span
+            className={`w-full h-0.5 bg-text-primary rounded transition-all duration-300 ${open ? 'opacity-0' : ''}`} />
+          
+          <span
+            className={`w-full h-0.5 bg-text-primary rounded transition-all duration-300 ${open ? '-rotate-45 -translate-y-[7px]' : ''}`} />
+          
+        </button>
+
+        <ul
+          className={`hidden md:flex gap-8 list-none max-md:fixed max-md:top-0 max-md:flex-col max-md:h-screen max-md:w-[min(280px,75%)] max-md:pt-20 max-md:px-8 max-md:gap-7 max-md:bg-bg-primary max-md:shadow-[-8px_0_40px_rgba(0,0,0,0.4)] max-md:z-[2000] transition-[right] duration-300 ${open ? 'max-md:!flex max-md:right-0' : 'max-md:-right-full'}`}>
+          
+          {links.map((l) =>
+          <li key={l.href}>
               <a
-              href={link.href}
-              onClick={(e) => handleClick(e, link.href)}
-              className="group relative pb-[3px] text-[0.82rem] font-medium uppercase tracking-[0.07em] text-text-primary">
+              href={l.href}
+              onClick={(e) => handleClick(e, l.href)}
+              className="group relative text-[0.82rem] font-medium tracking-[0.07em] uppercase text-text-primary pb-[3px]">
               
-                {link.label}
-                <span className="absolute bottom-0 left-0 h-[1.5px] w-0 bg-accent transition-all duration-300 group-hover:w-full" />
+                {l.label}
+                <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-accent transition-all duration-300 group-hover:w-full" />
               </a>
             </li>
           )}
         </ul>
-
-        <button
-          className="z-[3000] flex h-7 w-7 items-center justify-center md:hidden"
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Toggle navigation">
-          
-          {open ? <XIcon size={26} /> : <MenuIcon size={26} />}
-        </button>
       </div>
-
-      <AnimatePresence>
-        {open &&
-        <>
-            <motion.div
-            className="fixed inset-0 z-[1500] bg-black/30 md:hidden"
-            initial={{
-              opacity: 0
-            }}
-            animate={{
-              opacity: 1
-            }}
-            exit={{
-              opacity: 0
-            }}
-            onClick={() => setOpen(false)} />
-          
-            <motion.ul
-            className="fixed top-0 right-0 z-[2000] flex h-screen w-[min(280px,75%)] flex-col gap-7 bg-bg-primary px-8 pt-20 pb-8 shadow-[-8px_0_40px_rgba(0,0,0,0.4)] md:hidden"
-            initial={{
-              x: '100%'
-            }}
-            animate={{
-              x: 0
-            }}
-            exit={{
-              x: '100%'
-            }}
-            transition={{
-              duration: 0.3,
-              ease: [0.22, 1, 0.36, 1]
-            }}>
-            
-              {NAV_LINKS.map((link) =>
-            <li key={link.href}>
-                  <a
-                href={link.href}
-                onClick={(e) => handleClick(e, link.href)}
-                className="text-[0.82rem] font-medium uppercase tracking-[0.07em] text-text-primary">
-                
-                    {link.label}
-                  </a>
-                </li>
-            )}
-            </motion.ul>
-          </>
-        }
-      </AnimatePresence>
-    </motion.nav>);
+    </nav>);
 
 }

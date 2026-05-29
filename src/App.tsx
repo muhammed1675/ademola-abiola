@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { useScreenInit } from './useScreenInit';
-import { LoadingScreen } from './components/LoadingScreen';
+import { Loader } from './components/Loader';
+import { ScrollProgress } from './components/ScrollProgress';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
+import { ChapterDivider } from './components/ChapterDivider';
 import { About } from './components/About';
 import { Experience } from './components/Experience';
 import { Gallery } from './components/Gallery';
@@ -13,24 +14,30 @@ import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { BackToTop } from './components/BackToTop';
 export function App() {
-  useScreenInit();
-  const [loading, setLoading] = useState(true);
+  const [loaded, setLoaded] = useState(false);
   return (
-    <div className="min-h-screen w-full bg-bg-primary font-body text-text-primary">
+    <div className="w-full min-h-full bg-bg-primary overflow-x-hidden">
       <AnimatePresence>
-        {loading && <LoadingScreen onComplete={() => setLoading(false)} />}
+        {!loaded && <Loader onDone={() => setLoaded(true)} />}
       </AnimatePresence>
 
+      <ScrollProgress />
       <Navbar />
+
       <main>
         <Hero />
+        <ChapterDivider label="The Story Begins" />
         <About />
+        <ChapterDivider label="The Journey" />
         <Experience />
+        <ChapterDivider label="Captured Moments" />
         <Gallery />
+        <ChapterDivider label="The Milestones" />
         <Achievements />
         <Testimonials />
         <Contact />
       </main>
+
       <Footer />
       <BackToTop />
     </div>);

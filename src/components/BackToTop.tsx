@@ -12,6 +12,7 @@ export function BackToTop() {
     <AnimatePresence>
       {visible &&
       <motion.button
+        className="fixed bottom-7 right-7 max-[520px]:bottom-5 max-[520px]:right-5 w-11 h-11 bg-accent text-white rounded-full flex items-center justify-center z-[999] shadow-[0_4px_16px_rgba(39,174,96,0.35)] transition-colors hover:bg-accent-dark"
         aria-label="Back to top"
         onClick={() =>
         window.scrollTo({
@@ -19,7 +20,6 @@ export function BackToTop() {
           behavior: 'smooth'
         })
         }
-        className="fixed bottom-7 right-7 z-[999] flex h-11 w-11 items-center justify-center rounded-full bg-accent text-white shadow-[0_4px_16px_rgba(39,174,96,0.35)] transition-colors hover:bg-accent-dark"
         initial={{
           opacity: 0,
           y: 20

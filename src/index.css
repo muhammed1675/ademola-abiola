@@ -18,23 +18,18 @@
   --accent-dark: #1e8448;
   --accent-light: #52c981;
   --border-color: #d1e0d7;
+  --shadow-color: rgba(0, 0, 0, 0.1);
   --font-heading: 'Playfair Display', Georgia, serif;
   --font-body: 'DM Sans', sans-serif;
 }
-html {
-  scroll-behavior: smooth;
-}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body {
   font-family: var(--font-body);
   background-color: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.65;
-  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
-.font-heading {
-  font-family: var(--font-heading);
-}
-/* Hide scrollbar while preserving scroll on the loading lock */
-.no-scroll {
-  overflow: hidden;
-}
+.font-heading { font-family: var(--font-heading); }
+.font-body { font-family: var(--font-body); }

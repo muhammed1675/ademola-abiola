@@ -1,5 +1,5 @@
 export const manifest = {
   screens: {
-    scr_6vef11: { name: "Home", route: "/" }
+    scr_a1ihul: { name: "Home", route: "/" }
   }
 };
