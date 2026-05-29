@@ -50,8 +50,6 @@ export function Loader({ onDone }: LoaderProps) {
             repeatType: 'reverse',
             ease: 'easeInOut'
           }}>
-          
-          🏓
         </motion.span>
         <h2 className="font-heading font-bold text-white leading-tight tracking-tight text-[clamp(1.6rem,5vw,2.6rem)]">
           Coach Ademola Abiola
