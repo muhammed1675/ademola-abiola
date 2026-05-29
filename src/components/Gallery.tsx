@@ -16,11 +16,6 @@ export const galleryImages: GalleryImage[] = [
   portrait: true
 },
 {
-  src: '/assets/img/ademola-abiola-table-tennis-coach-dubai-4.jpg',
-  alt: 'Sprint action',
-  portrait: true
-},
-{
   src: '/assets/img/kids-table-tennis-training-dubai.jpg',
   alt: 'Kids table tennis training'
 },

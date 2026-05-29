@@ -61,7 +61,7 @@ export function About() {
           <Reveal direction="right" delay={0.2}>
             <div className="rounded-2xl overflow-hidden shadow-[0_20px_60px_var(--shadow-color)] aspect-[4/5] group">
               <img
-                src="/assets/img/ademola-abiola-table-tennis-coach-dubai-Copy.png"
+                src="/assets/img/ademola-abiola-table-tennis-coach-dubai-3.jpg"
                 alt="Coach Ademola Abiola"
                 loading="lazy"
                 className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" />
